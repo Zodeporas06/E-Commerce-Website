@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { trace } = require("../app");
 
 const connectDatabase = ()=>{
 
