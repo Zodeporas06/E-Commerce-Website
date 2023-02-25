@@ -1,7 +1,10 @@
 const app = require("./app.js");
 const dotenv = require("dotenv");
+const connectDatabase = require("./configurations/database.js");
 
 dotenv.config({path:"backend/configurations/files.env"});
+
+connectDatabase();
 
 const port = process.env.PORT;
 
