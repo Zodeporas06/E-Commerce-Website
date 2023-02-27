@@ -5,7 +5,6 @@ const connectDatabase = require("./configurations/database.js");
 dotenv.config({path:"backend/configurations/files.env"});
 
 connectDatabase();
-//hvfugvkhbkbkjbkjb
 
 const port = process.env.PORT;
 
