@@ -1,5 +1,6 @@
 const Product = require("../models/productModel.js");
 
+//Create a Product
 exports.createProduct = async (req, res, next)=> {
 
     const product = await Product.create(req.body);
@@ -11,6 +12,7 @@ exports.createProduct = async (req, res, next)=> {
     });
 };
 
+//Get a Product
 exports.getAllProducts = (req, res) => {
 
     res.status(200).json({message:"Working Fine"});
