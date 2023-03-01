@@ -13,7 +13,13 @@ exports.createProduct = async (req, res, next)=> {
 };
 
 //Get a Product
-exports.getAllProducts = (req, res) => {
+exports.getAllProducts = async(req, res) => {
 
-    res.status(200).json({message:"Working Fine"});
+    const products = await Product.find();
+
+    res.status(200).json({
+
+        success: true,
+        products,
+    });
 };
