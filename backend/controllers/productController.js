@@ -1,6 +1,6 @@
 const Product = require("../models/productModel.js");
 
-//Create a Product
+//Create a Product -- Admin
 exports.createProduct = async (req, res, next)=> {
 
     const product = await Product.create(req.body);
@@ -24,7 +24,7 @@ exports.getAllProducts = async(req, res) => {
     });
 };
 
-//Update a Product
+//Update a Product -- Admin
 exports.updateProducts = async(req, res, next) => {
 
     let product = await Product.findById(req.params.id);
