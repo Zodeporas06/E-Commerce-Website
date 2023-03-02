@@ -58,11 +58,7 @@ exports.deleteProduct = async (req, res, next) => {
 
     if(!product) {
 
-        return res.status(500).json({
-
-            success: false,
-            message: "Product Not Found",
-        })
+        return next(new ErrorHandler("Product Not Found", 404));
     }
     else {
 
@@ -83,11 +79,7 @@ exports.getProductDetails = async (req, res, next) => {
 
     if(!product) {
 
-        return res.status(500).json({
-
-            success: false,
-            message: "Product Not Found",
-        })
+        return next(new ErrorHandler("Product Not Found", 404));
     }
     else {
 
