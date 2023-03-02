@@ -1,4 +1,5 @@
 const Product = require("../models/productModel.js");
+const ErrorHandler = require("../utils/errorHandler.js");
 
 //Create a Product -- Admin
 exports.createProduct = async (req, res, next)=> {
@@ -31,11 +32,7 @@ exports.updateProducts = async(req, res, next) => {
 
     if(!product) {
 
-        return res.status(500).json({
-
-            success: false,
-            message: "Product Not Found",
-        })
+        return next(new ErrorHandler("Product Not Found", 404));
     }
     else {
 
