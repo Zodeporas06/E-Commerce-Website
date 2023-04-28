@@ -4,7 +4,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors.js");
 const ApiFeatures = require("../utils/apifeatures.js");
 
 //Create a Product -- Admin
-exports.createProduct = catchAsyncErrors(async (req, res, next)=> {
+exports.createProduct = catchAsyncErrors(async(req, res, next)=> {
 
     const product = await Product.create(req.body);
 
