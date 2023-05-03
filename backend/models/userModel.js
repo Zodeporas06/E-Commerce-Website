@@ -99,7 +99,7 @@ userSchema.methods.getResetPasswordToken = function() {
     this.resetPasswordToken = crypto
         .createHash("sha256")
         .update(resetToken)
-        .toString("hex");
+        .digest("hex");
 
     this.resetPasswordExpire = Date.now() + 15*60*1000;
 
