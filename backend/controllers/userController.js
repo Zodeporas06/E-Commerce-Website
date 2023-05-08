@@ -201,3 +201,14 @@ exports.updateUserProfile = catchAsyncErrors(async(req, res, next) => {
         success: true,
     });
 })
+
+exports.getAllUsers = catchAsyncErrors(async(req, res, next) => {
+
+    const user = await User.find();
+
+    res.status(200).json({
+
+        success: true,
+        user,
+    });
+})
