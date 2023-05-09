@@ -219,7 +219,7 @@ exports.getUserDetailsAdmin = catchAsyncErrors(async(req, res, next) => {
 
     if(!user) {
 
-        return next(new ErrorHandler("The specified user does not exist", 404));
+        return next(new ErrorHandler("The specified user does not exist", 400));
     }
 
     res.status(200).json({
@@ -227,4 +227,22 @@ exports.getUserDetailsAdmin = catchAsyncErrors(async(req, res, next) => {
         success: true,
         user,
     });
+})
+
+exports.deleteUser = catchAsyncErrors(async(req, res, next) => {
+
+    const user = await User.findById(req.params.id);
+
+    if(!user) {
+
+        return next(new ErrorHandler("The specified user does not exist", 400));
+    }
+
+    await user.remove();
+
+    res.status(200).json({
+
+        success: true,
+        message: "User deleted successfully",
+    })
 })
