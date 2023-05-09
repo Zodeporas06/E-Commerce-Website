@@ -57,12 +57,12 @@ const productSchema = new mongoose.Schema({
     },
     reviews: [
         {
-            /*user: {
+            user: {
 
                 type: mongoose.Schema.ObjectId,
                 ref: "User",
                 required: true,
-            },*/
+            },
             name: {
 
                 type: String,
