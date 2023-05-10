@@ -139,14 +139,14 @@ exports.createProductReview = catchAsyncErrors(async(req, res, next) => {
         product.reviews.push(review);
     }
 
-    let sumOfratings = 0;
+    let sumOfRatings = 0;
 
     product.reviews.forEach(rev=> {
 
-        sumOfratings += rev.rating
+        sumOfRatings += rev.rating
     })
 
-    product.ratings = sumOfratings/product.reviews.length;
+    product.ratings = sumOfRatings/product.reviews.length;
 
     product.numOfReviews = product.reviews.length;
 
@@ -172,5 +172,56 @@ exports.getProductReviews = catchAsyncErrors(async(req, res, next) => {
 
         success: true,
         reviews: product.reviews,
+    });
+})
+
+exports.deleteReview = catchAsyncErrors(async(req, res, next) => {
+
+    const product = await Product.findById(req.query.productId);
+
+    if(!product) {
+
+        return next(new ErrorHandler("product Not Found", 404));
+    }
+
+    const reviews = product.reviews.filter(
+
+        (rev)=> rev._id.toString() !== req.query.id.toString()
+    );
+
+    let sumOfRatings = 0;
+
+    reviews.forEach(rev=> {
+
+        sumOfRatings += rev.rating;
     })
+
+    let ratings;
+
+    if(reviews.length === 0) {
+
+        ratings = 0;
+    }else {
+
+        ratings = sumOfRatings/reviews.length;
+    }
+
+    const numOfReviews = reviews.length;
+
+    await Product.findByIdAndUpdate(req.query.productId, {
+
+        reviews,
+        ratings,
+        numOfReviews,
+    }, {
+
+        new: true,
+        runValidators: true,
+        useFindandModify: false,
+    });
+
+    res.status(200).json({
+
+        success: true,
+    });
 })
