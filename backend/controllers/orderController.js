@@ -37,10 +37,11 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
 
 exports.getOrderDetails = catchAsyncErrors(async(req, res, next) => {
 
+    //populate method id used to get related details of an attribute
     const order = await Order.findById(req.params.id).populate(
 
-        "user",
-        "name email"
+        "user",         //based on user id
+        "name email"    //get name and email of user
     );
 
     if(!order) {
@@ -53,4 +54,16 @@ exports.getOrderDetails = catchAsyncErrors(async(req, res, next) => {
         success: true,
         order,
     });
+})
+
+//this  method requires authentication
+exports.getMyOrders = catchAsyncErrors(async(req, res, next) => {
+
+    const orders = await Order.find({user: req.user._id});
+
+    res.status(200).json({
+
+        success: true,
+        orders,
+    })
 })
